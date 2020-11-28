@@ -9,9 +9,11 @@ import androidx.fragment.app.Fragment
 import com.s097t0r1.lycorismvp.R
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
+import javax.inject.Inject
 
 class FeedFragment : MvpAppCompatFragment(), FeedView {
 
+    @Inject
     @InjectPresenter
     lateinit var presenter: FeedPresenter
 
