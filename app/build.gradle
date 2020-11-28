@@ -52,7 +52,12 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     // Moxy
-    implementation "com.github.moxy-community:moxy:2.2.0"
-    kapt "com.github.moxy-community:moxy-compiler:2.2.0"
-    implementation "com.github.moxy-community:moxy-androidx:2.2.0"
+    implementation 'com.github.moxy-community:moxy:2.2.0'
+    kapt 'com.github.moxy-community:moxy-compiler:2.2.0'
+    implementation 'com.github.moxy-community:moxy-androidx:2.2.0'
+
+    // Room
+    implementation "androidx.room:room-runtime:2.2.5"
+    kapt "androidx.room:room-compiler:2.2.5"
+    implementation 'androidx.room:room-rxjava2:2.2.5'
 }
