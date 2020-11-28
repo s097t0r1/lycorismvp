@@ -6,15 +6,16 @@ import io.reactivex.Observable
 
 @Dao
 interface PhotoDAO {
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertPhoto(photo: DatabasePhoto): Completable
+    fun insertPhoto(photo: DatabasePhoto)
 
     @Delete
-    fun deletePhoto(photo: DatabasePhoto): Completable
+    fun deletePhoto(photo: DatabasePhoto)
 
-    @Query("SELECT * FROM photos_table WHERE id=:id")
+    @Query("SELECT * FROM photos WHERE id=:id")
     fun getPhoto(id: String): Observable<DatabasePhoto>
 
-    @Query("SELECT * FROM photos_table")
+    @Query("SELECT * FROM photos")
     fun getPhotos(): Observable<List<DatabasePhoto>>
 }
