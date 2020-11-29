@@ -4,5 +4,5 @@ data class Photo(
     val id: String,
     val imageUrl: String,
     val description: String,
-    val isFavorite: String
+    val isFavorite: Boolean
 )

@@ -6,9 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.s097t0r1.lycorismvp.App
 import com.s097t0r1.lycorismvp.R
+import moxy.InjectViewState
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
 import javax.inject.Inject
 
 class FeedFragment : MvpAppCompatFragment(), FeedView {
@@ -16,6 +19,9 @@ class FeedFragment : MvpAppCompatFragment(), FeedView {
     @Inject
     @InjectPresenter
     lateinit var presenter: FeedPresenter
+
+    @ProvidePresenter
+    fun providePresener(): FeedPresenter = presenter
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -29,5 +35,10 @@ class FeedFragment : MvpAppCompatFragment(), FeedView {
 
     override fun displayMessage() {
 
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        (activity?.application as App).appComponent.inject(this)
+        super.onCreate(savedInstanceState)
     }
 }

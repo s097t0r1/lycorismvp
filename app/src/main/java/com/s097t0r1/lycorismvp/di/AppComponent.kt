@@ -5,7 +5,7 @@ import com.s097t0r1.lycorismvp.ui.feed.FeedFragment
 import dagger.BindsInstance
 import dagger.Component
 
-@Component
+@Component(modules = [DatabaseModule::class, NetworkModule::class])
 interface AppComponent {
 
     @Component.Factory
