@@ -6,8 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.s097t0r1.lycorismvp.App
 import com.s097t0r1.lycorismvp.R
+import com.s097t0r1.lycorismvp.ui.PhotoAdapter
 import moxy.InjectViewState
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
@@ -21,7 +24,15 @@ class FeedFragment : MvpAppCompatFragment(), FeedView {
     lateinit var presenter: FeedPresenter
 
     @ProvidePresenter
-    fun providePresener(): FeedPresenter = presenter
+    fun providePresenter(): FeedPresenter = presenter
+
+
+    lateinit var recyclerViewListPhotos: RecyclerView
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        (activity?.application as App).appComponent.inject(this)
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -29,16 +40,28 @@ class FeedFragment : MvpAppCompatFragment(), FeedView {
             savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_feed, container, false)
-        val textView: TextView = root.findViewById(R.id.text_home)
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        recyclerViewListPhotos = view.findViewById(R.id.recyclerView_listPhotos)
+
+        setupRecyclerView(recyclerViewListPhotos)
+    }
+
+    private fun setupRecyclerView(recyclerView: RecyclerView) {
+        val _adapter = PhotoAdapter()
+        val _layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
+
+        with(recyclerView) {
+            adapter = _adapter
+            layoutManager = _layoutManager
+        }
     }
 
     override fun displayMessage() {
 
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        (activity?.application as App).appComponent.inject(this)
-        super.onCreate(savedInstanceState)
-    }
 }
