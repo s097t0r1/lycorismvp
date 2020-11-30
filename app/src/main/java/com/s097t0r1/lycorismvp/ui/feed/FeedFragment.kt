@@ -29,7 +29,7 @@ class FeedFragment : MvpAppCompatFragment(), FeedView {
     lateinit var recyclerViewListPhotos: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        (activity?.application as App).appComponent.inject(this)
+        App.INSTANCE.appComponent.inject(this)
         super.onCreate(savedInstanceState)
     }
 

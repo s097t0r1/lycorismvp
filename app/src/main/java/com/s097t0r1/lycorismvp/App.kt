@@ -6,8 +6,13 @@ import com.s097t0r1.lycorismvp.di.DaggerAppComponent
 class App : Application() {
     val appComponent = DaggerAppComponent.factory().create(this)
 
+    override fun onCreate() {
+        super.onCreate()
+        INSTANCE = this
+    }
+
     companion object {
-        var share = this
-        private set
+        lateinit var INSTANCE: App
+            private set
     }
 }
