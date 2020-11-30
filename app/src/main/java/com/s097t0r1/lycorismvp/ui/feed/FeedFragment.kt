@@ -63,10 +63,6 @@ class FeedFragment : MvpAppCompatFragment(), FeedView {
         swipeRefreshLayout.setOnRefreshListener {
             presenter.getPhotos(true)
         }
-
-        navigate_button.setOnClickListener {
-            presenter.navigate()
-        }
     }
 
     override fun startRefreshing() {

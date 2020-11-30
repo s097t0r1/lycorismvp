@@ -1,6 +1,7 @@
 package com.s097t0r1.lycorismvp.di
 
 import android.content.Context
+import com.s097t0r1.lycorismvp.MainActivity
 import com.s097t0r1.lycorismvp.ui.feed.FeedFragment
 import dagger.BindsInstance
 import dagger.Component
@@ -15,5 +16,8 @@ interface AppComponent {
         fun create(@BindsInstance context: Context): AppComponent
     }
 
+    fun inject(activity: MainActivity)
+
     fun inject(fragment: FeedFragment)
+
 }

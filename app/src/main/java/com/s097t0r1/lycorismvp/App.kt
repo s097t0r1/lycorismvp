@@ -8,15 +8,6 @@ class App : Application() {
 
     val appComponent = DaggerAppComponent.factory().create(this)
 
-    private val cicerone = Cicerone.create()
-
-    val router
-        get() = cicerone.router
-
-    val navigatorHolder
-        get() = cicerone.getNavigatorHolder()
-
-
     override fun onCreate() {
         super.onCreate()
         INSTANCE = this

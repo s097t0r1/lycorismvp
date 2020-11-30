@@ -1,6 +1,7 @@
 package com.s097t0r1.lycorismvp.ui.feed
 
 import android.util.Log
+import com.github.terrakok.cicerone.Router
 import com.s097t0r1.lycorismvp.App
 import com.s097t0r1.lycorismvp.model.source.PhotoRepository
 import com.s097t0r1.lycorismvp.ui.Screens
@@ -14,7 +15,8 @@ import javax.inject.Inject
 
 @InjectViewState
 class FeedPresenter @Inject constructor(
-    private val photoRepository: PhotoRepository
+    private val photoRepository: PhotoRepository,
+    private val router: Router
 ) : MvpPresenter<FeedView>() {
 
     private val disposables = CompositeDisposable()
@@ -42,7 +44,7 @@ class FeedPresenter @Inject constructor(
     }
 
     fun navigate() {
-        App.INSTANCE.router.replaceScreen(Screens.Favorites())
+        router.replaceScreen(Screens.Favorites())
     }
 
     override fun onDestroy() {
