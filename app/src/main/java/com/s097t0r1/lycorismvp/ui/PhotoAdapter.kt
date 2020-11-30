@@ -8,6 +8,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.s097t0r1.lycorismvp.R
 import com.s097t0r1.lycorismvp.model.Photo
 
@@ -27,7 +28,12 @@ class PhotoAdapter : ListAdapter<Photo, PhotoAdapter.PhotoViewHolder>(PhotoItemD
         val imageViewPhoto = itemView.findViewById<ImageView>(R.id.imageView_photo)
 
         fun bind(photo: Photo) {
-
+            Glide.with(imageViewPhoto.context)
+                .load(photo.imageUrl)
+                .centerCrop()
+                .placeholder(R.drawable.ic_photo_24)
+                .error(R.drawable.ic_error_outline_24)
+                .into(imageViewPhoto)
         }
 
         companion object {
