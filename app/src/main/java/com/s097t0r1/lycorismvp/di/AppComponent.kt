@@ -4,8 +4,10 @@ import android.content.Context
 import com.s097t0r1.lycorismvp.ui.feed.FeedFragment
 import dagger.BindsInstance
 import dagger.Component
+import javax.inject.Singleton
 
-@Component(modules = [DatabaseModule::class, NetworkModule::class])
+@Singleton
+@Component(modules = [DatabaseModule::class, NetworkModule::class, RouterModule::class])
 interface AppComponent {
 
     @Component.Factory
