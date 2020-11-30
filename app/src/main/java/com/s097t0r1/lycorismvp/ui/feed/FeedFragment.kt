@@ -25,7 +25,6 @@ class FeedFragment : MvpAppCompatFragment(), FeedView {
     @ProvidePresenter
     fun providePresenter(): FeedPresenter = presenter
 
-
     lateinit var recyclerViewListPhotos: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,6 +62,10 @@ class FeedFragment : MvpAppCompatFragment(), FeedView {
     private fun setupListeners() {
         swipeRefreshLayout.setOnRefreshListener {
             presenter.getPhotos(true)
+        }
+
+        navigate_button.setOnClickListener {
+            presenter.navigate()
         }
     }
 

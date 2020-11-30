@@ -84,5 +84,8 @@ dependencies {
     // Multidex
     implementation 'com.android.support:multidex:1.0.3'
 
+    // Cicerone
+    implementation 'com.github.terrakok:cicerone:6.6'
+
 
 }

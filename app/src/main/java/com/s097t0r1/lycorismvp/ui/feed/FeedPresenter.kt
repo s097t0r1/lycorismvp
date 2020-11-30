@@ -1,7 +1,9 @@
 package com.s097t0r1.lycorismvp.ui.feed
 
 import android.util.Log
+import com.s097t0r1.lycorismvp.App
 import com.s097t0r1.lycorismvp.model.source.PhotoRepository
+import com.s097t0r1.lycorismvp.ui.Screens
 import com.s097t0r1.lycorismvp.utils.addTo
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -36,6 +38,11 @@ class FeedPresenter @Inject constructor(
             }, { onError ->
                 viewState.displayError()
             }).addTo(disposables)
+
+    }
+
+    fun navigate() {
+        App.INSTANCE.router.replaceScreen(Screens.Favorites())
     }
 
     override fun onDestroy() {

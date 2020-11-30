@@ -2,6 +2,7 @@ package com.s097t0r1.lycorismvp.ui.feed
 
 import com.s097t0r1.lycorismvp.model.Photo
 import moxy.MvpView
+import moxy.viewstate.strategy.StateStrategyType
 import moxy.viewstate.strategy.alias.AddToEndSingle
 import moxy.viewstate.strategy.alias.SingleState
 import moxy.viewstate.strategy.alias.Skip
