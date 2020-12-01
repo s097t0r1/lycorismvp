@@ -1,7 +1,6 @@
 package com.s097t0r1.lycorismvp.model.source.remote
 
-import io.reactivex.Maybe
-import io.reactivex.Observable
+import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Path
@@ -14,9 +13,9 @@ interface UnsplashAPI {
 
     @Headers(AUTH_HEADER)
     @GET("photos")
-    fun getPhotos(): Observable<String>
+    fun getPhotos(): Single<String>
 
     @Headers(AUTH_HEADER)
     @GET("photos/{id}")
-    fun getPhoto(@Path("id")id: String): Observable<String>
+    fun getPhoto(@Path("id")id: String): Single<String>
 }
