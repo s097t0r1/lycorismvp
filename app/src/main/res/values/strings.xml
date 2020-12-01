@@ -1,8 +1,9 @@
 <resources>
-    <string name="app_name">LycorisMVP</string>
+    <string name="app_name">Lycoris</string>
     <string name="title_feed">Feed</string>
     <string name="title_about">About</string>
     <string name="title_favorites">Favorites</string>
     <string name="error_message">Oops, something went wrong</string>
     <string name="content_description">Photo</string>
+    <string name="empty_message">Oops, it is empty</string>
 </resources>
