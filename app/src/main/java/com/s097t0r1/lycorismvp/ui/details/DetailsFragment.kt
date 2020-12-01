@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.s097t0r1.lycorismvp.App
 import com.s097t0r1.lycorismvp.R
 import com.s097t0r1.lycorismvp.model.Photo
+import com.s097t0r1.lycorismvp.ui.BackButtonListener
 import kotlinx.android.synthetic.main.fragment_details.*
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
@@ -23,7 +24,7 @@ private const val ARG_ID = "id"
  * Use the [DetailsFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class DetailsFragment : MvpAppCompatFragment(), DetailsView {
+class DetailsFragment : MvpAppCompatFragment(), DetailsView, BackButtonListener {
 
     @Inject
     @InjectPresenter
@@ -58,6 +59,8 @@ class DetailsFragment : MvpAppCompatFragment(), DetailsView {
             presenter.setFavoriteState(checked)
         }
     }
+
+
 
     override fun showError() {
         textView_errorMessage.visibility = View.VISIBLE
@@ -101,6 +104,10 @@ class DetailsFragment : MvpAppCompatFragment(), DetailsView {
                     putString(ARG_ID, id)
                 }
             }
+    }
+
+    override fun onBackPressed() {
+        presenter.onBackPressed()
     }
 
 

@@ -2,9 +2,11 @@ package com.s097t0r1.lycorismvp
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.AppNavigator
+import com.s097t0r1.lycorismvp.ui.BackButtonListener
 import com.s097t0r1.lycorismvp.ui.Screens
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
@@ -45,6 +47,23 @@ class MainActivity : AppCompatActivity() {
     override fun onPause() {
         navigatorHolder.removeNavigator()
         super.onPause()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val fm = supportFragmentManager
+        var fragment: Fragment? = null
+        val fragments = fm.fragments
+        for (f in fragments) {
+            if (f.isVisible) {
+                fragment = f
+                break
+            }
+        }
+        if (fragment != null && fragment is BackButtonListener) {
+            (fragment as BackButtonListener).onBackPressed()
+
+    }
     }
 
     override fun onResumeFragments() {

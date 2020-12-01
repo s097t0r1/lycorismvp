@@ -1,5 +1,6 @@
 package com.s097t0r1.lycorismvp.ui.details
 
+import com.github.terrakok.cicerone.Router
 import com.s097t0r1.lycorismvp.model.Photo
 import com.s097t0r1.lycorismvp.model.source.PhotoRepository
 import com.s097t0r1.lycorismvp.utils.addTo
@@ -12,7 +13,8 @@ import javax.inject.Inject
 
 @InjectViewState
 class DetailsPresenter @Inject constructor(
-    private val photoRepository: PhotoRepository
+    private val photoRepository: PhotoRepository,
+    private val router: Router
 ) : MvpPresenter<DetailsView>() {
 
     private val disposables = CompositeDisposable()
@@ -46,6 +48,10 @@ class DetailsPresenter @Inject constructor(
                 .subscribe()
 
         _photo.isFavorite = favorite
+    }
+
+    fun onBackPressed() {
+        router.exit()
     }
 
     override fun onDestroy() {
