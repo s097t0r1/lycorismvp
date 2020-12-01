@@ -48,4 +48,8 @@ class DetailsPresenter @Inject constructor(
         _photo.isFavorite = favorite
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        disposables.dispose()
+    }
 }
