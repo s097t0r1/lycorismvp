@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.s097t0r1.lycorismvp.App
 import com.s097t0r1.lycorismvp.R
 import com.s097t0r1.lycorismvp.model.Photo
+import com.s097t0r1.lycorismvp.ui.ItemClickListener
 import com.s097t0r1.lycorismvp.ui.PhotoAdapter
 import kotlinx.android.synthetic.main.fragment_feed.*
 import moxy.MvpAppCompatFragment
@@ -50,7 +51,11 @@ class FeedFragment : MvpAppCompatFragment(), FeedView {
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
-        val _adapter = PhotoAdapter()
+        val _adapter = PhotoAdapter(object : ItemClickListener {
+            override fun onClick(id: String) {
+                presenter.navigate(id)
+            }
+        })
         val _layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
 
         with(recyclerView) {

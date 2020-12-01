@@ -1,7 +1,6 @@
 package com.s097t0r1.lycorismvp
 
 import android.app.Application
-import com.github.terrakok.cicerone.Cicerone
 import com.s097t0r1.lycorismvp.di.DaggerAppComponent
 
 class App : Application() {

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.details.DetailsFragment">
+
+    <LinearLayout
+        android:id="@+id/linearLayout_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/imageView_detailsPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="320dp"
+            android:layout_margin="8dp"
+            android:contentDescription="@string/content_description"
+            tools:src="@drawable/ic_person_24" />
+
+        <TextView
+            android:id="@+id/textView_descriptionPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:textAlignment="center"
+            tools:text="@string/error_message" />
+
+        <ToggleButton
+            android:id="@+id/toggleButton_favoriteButton"
+            style="@style/FavoriteButton"
+            android:layout_gravity="end"
+            android:layout_marginHorizontal="8dp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView_errorMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/error_message"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:visibility="gone"
+        app:drawableTopCompat="@drawable/ic_error_outline_128" />
+
+    <ProgressBar
+        android:id="@+id/progressBar_loadingDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
+
+</FrameLayout>

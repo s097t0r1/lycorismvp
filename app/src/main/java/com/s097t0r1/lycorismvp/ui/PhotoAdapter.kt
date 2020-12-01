@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +13,7 @@ import com.bumptech.glide.Glide
 import com.s097t0r1.lycorismvp.R
 import com.s097t0r1.lycorismvp.model.Photo
 
-class PhotoAdapter : ListAdapter<Photo, PhotoAdapter.PhotoViewHolder>(PhotoItemDiffCallback()) {
+class PhotoAdapter(val itemClickListener: ItemClickListener) : ListAdapter<Photo, PhotoAdapter.PhotoViewHolder>(PhotoItemDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoViewHolder {
         return PhotoViewHolder.from(parent)
@@ -20,20 +21,25 @@ class PhotoAdapter : ListAdapter<Photo, PhotoAdapter.PhotoViewHolder>(PhotoItemD
 
     override fun onBindViewHolder(holder: PhotoViewHolder, position: Int) {
         val photo = getItem(position)
-        holder.bind(photo)
+        holder.bind(photo, itemClickListener)
     }
 
     class PhotoViewHolder private constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val imageViewPhoto = itemView.findViewById<ImageView>(R.id.imageView_photo)
+        val itemLayout = itemView.findViewById<ConstraintLayout>(R.id.constraintLayout_itemLayout)
 
-        fun bind(photo: Photo) {
+        fun bind(photo: Photo, clickListener: ItemClickListener) {
             Glide.with(imageViewPhoto.context)
                 .load(photo.imageUrl)
                 .centerCrop()
                 .placeholder(R.drawable.ic_photo_24)
                 .error(R.drawable.ic_error_outline_24)
                 .into(imageViewPhoto)
+
+            itemLayout.setOnClickListener {
+                clickListener.onClick(photo.id)
+            }
         }
 
         companion object {
@@ -56,4 +62,8 @@ class PhotoItemDiffCallback : DiffUtil.ItemCallback<Photo>() {
         return (oldItem.description == newItem.description && oldItem.imageUrl == newItem.imageUrl)
     }
 
+}
+
+interface ItemClickListener {
+    fun onClick(id: String)
 }

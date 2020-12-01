@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
 
         nav_view.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.navigation_feed -> router.replaceScreen(Screens.Feed()) //envia comandos para o navigator
+                R.id.navigation_feed -> router.replaceScreen(Screens.Feed())
                 R.id.navigation_favorites -> router.replaceScreen(Screens.Favorites())
                 R.id.navigation_about -> router.replaceScreen(Screens.Favorites())
             }

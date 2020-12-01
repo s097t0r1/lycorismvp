@@ -31,7 +31,7 @@ class FeedPresenter @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { viewState.startRefreshing() }
             .doOnError { Log.e("Getting data", it.toString()) }
-            .doOnComplete { viewState.stopRefreshing() }
+            .doOnSuccess { viewState.stopRefreshing() }
             .subscribe({ onSuccess ->
                 if(onSuccess.isEmpty())
                     viewState.displayError()
@@ -43,8 +43,12 @@ class FeedPresenter @Inject constructor(
 
     }
 
-    fun navigate() {
-        router.replaceScreen(Screens.Favorites())
+    fun navigate(id: String) {
+        router.navigateTo(Screens.Details(id))
+    }
+
+    fun back() {
+        router.backTo(Screens.Feed())
     }
 
     override fun onDestroy() {
