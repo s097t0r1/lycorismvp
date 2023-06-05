@@ -5,13 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.s097t0r1.lycorismvp.App
-import com.s097t0r1.lycorismvp.R
+import com.s097t0r1.lycorismvp.databinding.FragmentFavoritesBinding
 import com.s097t0r1.lycorismvp.model.Photo
 import com.s097t0r1.lycorismvp.ui.ItemClickListener
 import com.s097t0r1.lycorismvp.ui.PhotoAdapter
-import kotlinx.android.synthetic.main.fragment_favorites.*
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
@@ -26,6 +24,8 @@ class FavoritesFragment : MvpAppCompatFragment(), FavoritesView {
     @ProvidePresenter
     fun providePresenter() = presenter
 
+    lateinit var binding: FragmentFavoritesBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         App.INSTANCE.appComponent.inject(this)
         super.onCreate(savedInstanceState)
@@ -36,15 +36,15 @@ class FavoritesFragment : MvpAppCompatFragment(), FavoritesView {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_favorites, container, false)
-        return root
+        binding = FragmentFavoritesBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
 
-        swipeRefreshLayout.setOnRefreshListener {
+        binding.swipeRefreshLayout.setOnRefreshListener {
             presenter.getPhotos()
         }
     }
@@ -59,26 +59,26 @@ class FavoritesFragment : MvpAppCompatFragment(), FavoritesView {
 
         val _layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
 
-        with(recyclerView_listFavoritePhotos) {
+        with(binding.recyclerViewListFavoritePhotos) {
             adapter = _adapter
             layoutManager = _layoutManager
         }
     }
 
     override fun startRefreshing() {
-        swipeRefreshLayout.isRefreshing = true
+        binding.swipeRefreshLayout.isRefreshing = true
     }
 
     override fun stopRefreshing() {
-        swipeRefreshLayout.isRefreshing = false
+        binding.swipeRefreshLayout.isRefreshing = false
     }
 
     override fun refreshListPhotos(photos: List<Photo>) {
-        textView_errorMessage.visibility = View.GONE
-        (recyclerView_listFavoritePhotos.adapter as PhotoAdapter).submitList(photos)
+        binding.recyclerViewListFavoritePhotos.visibility = View.GONE
+        (binding.recyclerViewListFavoritePhotos.adapter as PhotoAdapter).submitList(photos)
     }
 
     override fun displayError() {
-        textView_errorMessage.visibility = View.VISIBLE
+        binding.recyclerViewListFavoritePhotos.visibility = View.VISIBLE
     }
 }

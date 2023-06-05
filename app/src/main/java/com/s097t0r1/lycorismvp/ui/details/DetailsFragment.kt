@@ -8,9 +8,9 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.s097t0r1.lycorismvp.App
 import com.s097t0r1.lycorismvp.R
+import com.s097t0r1.lycorismvp.databinding.FragmentDetailsBinding
 import com.s097t0r1.lycorismvp.model.Photo
 import com.s097t0r1.lycorismvp.ui.BackButtonListener
-import kotlinx.android.synthetic.main.fragment_details.*
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
@@ -33,6 +33,7 @@ class DetailsFragment : MvpAppCompatFragment(), DetailsView, BackButtonListener 
     @ProvidePresenter
     fun providePresenter() = presenter
 
+    lateinit var binding: FragmentDetailsBinding
 
     private var param1: String? = null
 
@@ -48,14 +49,15 @@ class DetailsFragment : MvpAppCompatFragment(), DetailsView, BackButtonListener 
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_details, container, false)
+        binding = FragmentDetailsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter.getPhoto(requireArguments().getString(ARG_ID, ""))
 
-        toggleButton_favoriteButton.setOnCheckedChangeListener { _, checked ->
+        binding.toggleButtonFavoriteButton.setOnCheckedChangeListener { _, checked ->
             presenter.setFavoriteState(checked)
         }
     }
@@ -63,15 +65,15 @@ class DetailsFragment : MvpAppCompatFragment(), DetailsView, BackButtonListener 
 
 
     override fun showError() {
-        textView_errorMessage.visibility = View.VISIBLE
+        binding.textViewErrorMessage.visibility = View.VISIBLE
     }
 
     override fun showProgressBar() {
-        progressBar_loadingDetails.visibility = View.VISIBLE
+        binding.progressBarLoadingDetails.visibility = View.VISIBLE
     }
 
     override fun hideProgressBar() {
-        progressBar_loadingDetails.visibility = View.GONE
+        binding.progressBarLoadingDetails.visibility = View.GONE
     }
 
     override fun showResult(photo: Photo) {
@@ -80,13 +82,13 @@ class DetailsFragment : MvpAppCompatFragment(), DetailsView, BackButtonListener 
             .centerCrop()
             .error(R.drawable.ic_error_outline_24)
             .placeholder(R.drawable.ic_person_24)
-            .into(imageView_detailsPhoto)
+            .into(binding.imageViewDetailsPhoto)
 
-        textView_descriptionPhoto.text = photo.description
+        binding.textViewDescriptionPhoto.text = photo.description
 
-        toggleButton_favoriteButton.isChecked = photo.isFavorite
+        binding.toggleButtonFavoriteButton.isChecked = photo.isFavorite
 
-        linearLayout_details.visibility = View.VISIBLE
+        binding.linearLayoutDetails.visibility = View.VISIBLE
     }
 
     companion object {

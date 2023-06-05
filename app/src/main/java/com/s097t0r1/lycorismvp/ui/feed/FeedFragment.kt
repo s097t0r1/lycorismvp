@@ -7,11 +7,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.s097t0r1.lycorismvp.App
-import com.s097t0r1.lycorismvp.R
+import com.s097t0r1.lycorismvp.databinding.FragmentFeedBinding
 import com.s097t0r1.lycorismvp.model.Photo
 import com.s097t0r1.lycorismvp.ui.ItemClickListener
 import com.s097t0r1.lycorismvp.ui.PhotoAdapter
-import kotlinx.android.synthetic.main.fragment_feed.*
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
@@ -26,7 +25,7 @@ class FeedFragment : MvpAppCompatFragment(), FeedView {
     @ProvidePresenter
     fun providePresenter(): FeedPresenter = presenter
 
-    lateinit var recyclerViewListPhotos: RecyclerView
+    lateinit var binding: FragmentFeedBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         App.INSTANCE.appComponent.inject(this)
@@ -38,15 +37,14 @@ class FeedFragment : MvpAppCompatFragment(), FeedView {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_feed, container, false)
-        return root
+        binding = FragmentFeedBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        recyclerViewListPhotos = view.findViewById(R.id.recyclerView_listPhotos)
 
-        setupRecyclerView(recyclerViewListPhotos)
+        setupRecyclerView(binding.recyclerViewListPhotos)
         setupListeners()
     }
 
@@ -65,27 +63,27 @@ class FeedFragment : MvpAppCompatFragment(), FeedView {
     }
 
     private fun setupListeners() {
-        swipeRefreshLayout.setOnRefreshListener {
+        binding.swipeRefreshLayout.setOnRefreshListener {
             presenter.getPhotos(true)
         }
     }
 
     override fun startRefreshing() {
-        swipeRefreshLayout.isRefreshing = true
+        binding.swipeRefreshLayout.isRefreshing = true
     }
 
     override fun stopRefreshing() {
-        swipeRefreshLayout.isRefreshing = false
+        binding.swipeRefreshLayout.isRefreshing = false
     }
 
 
     override fun refreshListPhotos(photos: List<Photo>) {
-        (recyclerViewListPhotos.adapter as PhotoAdapter).submitList(photos)
-        textView_errorMessage.visibility = View.GONE
+        (binding.recyclerViewListPhotos.adapter as PhotoAdapter).submitList(photos)
+        binding.textViewErrorMessage.visibility = View.GONE
     }
 
     override fun displayError() {
-        textView_errorMessage.visibility = View.VISIBLE
+        binding.textViewErrorMessage.visibility = View.VISIBLE
     }
 
 

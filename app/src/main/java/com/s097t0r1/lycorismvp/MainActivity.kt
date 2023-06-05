@@ -6,9 +6,9 @@ import androidx.fragment.app.Fragment
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.AppNavigator
+import com.s097t0r1.lycorismvp.databinding.ActivityMainBinding
 import com.s097t0r1.lycorismvp.ui.BackButtonListener
 import com.s097t0r1.lycorismvp.ui.Screens
-import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -21,20 +21,23 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var navigatorHolder: NavigatorHolder
 
+    lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         App.INSTANCE.appComponent.inject(this)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         setupNavigationBar()
     }
 
     private fun setupNavigationBar() {
 
-        nav_view.selectedItemId = R.id.navigation_feed
+        binding.navView.selectedItemId = R.id.navigation_feed
         router.replaceScreen(Screens.Feed())
 
-        nav_view.setOnNavigationItemSelectedListener { item ->
+        binding.navView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_feed -> router.replaceScreen(Screens.Feed())
                 R.id.navigation_favorites -> router.replaceScreen(Screens.Favorites())
