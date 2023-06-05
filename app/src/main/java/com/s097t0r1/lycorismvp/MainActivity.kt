@@ -9,6 +9,7 @@ import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.s097t0r1.lycorismvp.databinding.ActivityMainBinding
 import com.s097t0r1.lycorismvp.ui.BackButtonListener
 import com.s097t0r1.lycorismvp.ui.Screens
+import toothpick.ktp.KTP
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -24,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        App.INSTANCE.appComponent.inject(this)
+        KTP.openScope(App::class).inject(this)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

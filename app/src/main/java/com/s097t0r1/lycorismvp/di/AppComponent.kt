@@ -9,21 +9,21 @@ import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
 
-@Singleton
-@Component(modules = [DatabaseModule::class, NetworkModule::class, RouterModule::class])
-interface AppComponent {
-
-    @Component.Factory
-    interface Factory {
-        fun create(@BindsInstance context: Context): AppComponent
-    }
-
-    fun inject(activity: MainActivity)
-
-    fun inject(fragment: FeedFragment)
-
-    fun inject(fragment: DetailsFragment)
-
-    fun inject(fragment: FavoritesFragment)
-
-}
+//@Singleton
+//@Component(modules = [DatabaseModule::class, NetworkModule::class, RouterModule::class])
+//interface AppComponent {
+//
+//    @Component.Factory
+//    interface Factory {
+//        fun create(@BindsInstance context: Context): AppComponent
+//    }
+//
+//    fun inject(activity: MainActivity)
+//
+//    fun inject(fragment: FeedFragment)
+//
+//    fun inject(fragment: DetailsFragment)
+//
+//    fun inject(fragment: FavoritesFragment)
+//
+//}

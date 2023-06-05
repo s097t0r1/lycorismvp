@@ -3,15 +3,15 @@ package com.s097t0r1.lycorismvp.di
 import android.content.Context
 import com.s097t0r1.lycorismvp.model.source.local.PhotoDAO
 import com.s097t0r1.lycorismvp.model.source.local.PhotoDatabase
-import dagger.Module
-import dagger.Provides
-import javax.inject.Singleton
+import toothpick.config.Module
 
-@Module
-object DatabaseModule {
+class DatabaseModule(
+    private val context: Context
+) : Module() {
 
-    @Singleton
-    @Provides
-    fun provideDAO(context: Context): PhotoDAO =
-        PhotoDatabase.getInstance(context).photoDAO()
+    init {
+        bind(PhotoDAO::class.java)
+            .toInstance(PhotoDatabase.getInstance(context).photoDAO())
+    }
+
 }

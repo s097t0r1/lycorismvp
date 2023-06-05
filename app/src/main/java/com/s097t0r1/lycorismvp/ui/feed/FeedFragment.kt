@@ -14,6 +14,7 @@ import com.s097t0r1.lycorismvp.ui.PhotoAdapter
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
+import toothpick.ktp.KTP
 import javax.inject.Inject
 
 class FeedFragment : MvpAppCompatFragment(), FeedView {
@@ -28,7 +29,7 @@ class FeedFragment : MvpAppCompatFragment(), FeedView {
     lateinit var binding: FragmentFeedBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        App.INSTANCE.appComponent.inject(this)
+        KTP.openScope(App::class).inject(this)
         super.onCreate(savedInstanceState)
     }
 

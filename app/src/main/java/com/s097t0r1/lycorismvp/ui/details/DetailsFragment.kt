@@ -14,6 +14,7 @@ import com.s097t0r1.lycorismvp.ui.BackButtonListener
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
+import toothpick.ktp.KTP
 import javax.inject.Inject
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -38,7 +39,7 @@ class DetailsFragment : MvpAppCompatFragment(), DetailsView, BackButtonListener 
     private var param1: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        App.INSTANCE.appComponent.inject(this)
+        KTP.openScope(App::class).inject(this)
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_ID)
